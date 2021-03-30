@@ -23,3 +23,22 @@ app.listen(port, function () {
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
+app.post('/analyse', function (req, res) {
+    urlReq = req.body;
+    console.log(urlReq)
+
+    formdata = {
+        "key":"359858ef84deeccf76da0de203d5f639",
+        "lang":"en",
+        "url":"https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url"
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+      console.log("options are",requestOptions)
+      
+      
+})

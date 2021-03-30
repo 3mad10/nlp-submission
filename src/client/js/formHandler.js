@@ -1,24 +1,47 @@
 function handleSubmit(event) {
     event.preventDefault()
 
+        
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    Client.checkForName(formText)
-
-    const formdata = {
-        "key":"359858ef84deeccf76da0de203d5f639",
-        "url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
-        "lang":"en"
-    }
-    const response = fetch("https://api.meaningcloud.com/sentiment-2.1",formdata)
-    console.log(response)
-
+    
     console.log("::: Form Submitted :::")
-    fetch('http://localhost:3000/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
+    // fetch('http://localhost:3000/test')
+    // .then(res => res.json())
+    // .then(function(res) {
+    //     document.getElementById('results').innerHTML = res.message
+    // })
+
+    const postData = async (url = '', data = {})=>{
+        const response = await fetch(url, {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        try {
+            const newData = await response.json();
+            return newData
+        }catch(error) {
+            console.log('error',error);
+        }
+    
+    }
+
+    
+
+    let formText = document.getElementById('name').value;
+
+    postData('http://localhost:3000/analyse',"https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url").then(function(analysis){
+
+    const resultSpace = document.getElementById('results');
+
+    resultSpace.innerHTML = analysis;
     })
+
+    
+    console.log("posted")
 }
 
 export { handleSubmit }
