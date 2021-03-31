@@ -6,7 +6,7 @@ the app takes the url of the article the user wanst to process and outputs the r
 
 ## Running the project
 
-### Step 1:Clone the project
+### Step 1: Clone the project
 - clone the project or download the zip file.
 
 ### Step 2: Install the dependencies
