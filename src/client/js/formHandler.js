@@ -1,6 +1,9 @@
 function handleSubmit(event) {
     event.preventDefault()
 
+
+    
+    const apiKey = '359858ef84deeccf76da0de203d5f639';
         
     // check what text was put into the form field
     
@@ -26,20 +29,15 @@ function handleSubmit(event) {
         }catch(error) {
             console.log('error',error);
         }
-    
     }
 
     
 
     let formText = document.getElementById('name').value;
 
-    postData('http://localhost:3000/analyse',"https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url").then(function(analysis){
+    
 
-    const resultSpace = document.getElementById('results');
-
-    resultSpace.innerHTML = analysis;
-    })
-
+    postData('/analyse',{'url':formText}).then(analysis => console.log(analysis))
     
     console.log("posted")
 }
