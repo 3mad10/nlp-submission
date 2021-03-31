@@ -1,12 +1,6 @@
 function handleSubmit(event) {
     event.preventDefault()
-    
-    console.log("::: Form Submitted :::")
-    // fetch('http://localhost:3000/test')
-    // .then(res => res.json())
-    // .then(function(res) {
-    //     document.getElementById('results').innerHTML = res.message
-    // })
+
 
     const postData = async (url = '', data = {})=>{
         const response = await fetch(url, {
@@ -24,12 +18,16 @@ function handleSubmit(event) {
             console.log('error',error);
         }
     }
-
     
     let formText = document.getElementById('name').value;
 
     if (Client.checkURL(formText)){
-        postData('/analyse',{'url':formText}).then((analysis) => console.log(analysis))
+        postData('/analyse',{'url':formText}).then((analysis)=>{
+            document.getElementById('confidence').innerHTML = `confidence level : ${analysis.confidence}`;
+            document.getElementById('score').innerHTML = `score : ${analysis.score}`;
+            document.getElementById('irony').innerHTML = `irony level : ${analysis.irony}`;
+            document.getElementById('agreement').innerHTML = `agreement : ${analysis.agreement}`;
+        });
     }
     else {alert('please enter a valid url')}
     
